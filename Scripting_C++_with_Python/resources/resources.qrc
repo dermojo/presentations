@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource prefix="/myresources">
+    <file alias="busy-icon.png">busy-icon.png</file>
+    <file alias="invisible-icon.png">invisible-icon.png</file>
+    <file alias="online-icon.png">online-icon.png</file>
+</qresource>
+</RCC>

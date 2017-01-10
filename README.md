@@ -8,3 +8,4 @@ Contents:
    Short sample to demonstrate how to use state machines with Boost.MSM (2015-03-12)
     * Sorry, the source code comments are in German...
  * [Special Purpose Strings Library](https://github.com/dermojo/spsl) (2016-11-10)
+ * [Scripting C++ with Python](https://github.com/dermojo/presentations/tree/master/Scripting_C++_with_Python) (2017-01-12)
