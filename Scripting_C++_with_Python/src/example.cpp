@@ -1,7 +1,7 @@
 /**
  * @file    example.cpp
  * @author	daniel
- * @brief   Exmaple main program - QT GUI with script capabilities (4 buttons + 4 icons)
+ * @brief   Example main program - QT GUI with script capabilities (4 buttons + 4 icons)
  */
 
 #include <Python.h>
