@@ -1,14 +1,16 @@
 /**
- * @file	example.cpp
+ * @file    example.cpp
  * @author	daniel
- * @brief
+ * @brief   Exmaple main program - QT GUI with script capabilities (4 buttons + 4 icons)
  */
 
-//#include <Python.h>
+#include <Python.h>
 #include "pybind11/pybind11.h"
 #include "pybind11/functional.h"
 
 #include <memory>
+#include <vector>
+#include <string>
 
 // include Qt for a simple GUI
 #include <QtWidgets/QApplication>
