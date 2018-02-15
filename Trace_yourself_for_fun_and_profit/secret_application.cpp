@@ -21,9 +21,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-#ifdef PTRACE_MYSELF
-#include "syscalls.hpp"
-#endif // PTRACE_MYSELF
+#include "syscalltable.hpp"
 
 static bool debug = false;
 
@@ -120,9 +118,11 @@ static bool waitForSyscall(const pid_t pid)
 
 static void startPtrace()
 {
+    SyscallTable syscallTable;
+
     // to be more useful, parse syscall names from the installed headers
     if (debug)
-        readSyscallNames("/usr/include/x86_64-linux-gnu/asm/unistd_64.h");
+        syscallTable.load("/usr/include/x86_64-linux-gnu/asm/unistd_64.h");
 
     // fork of a child process and trace it
     auto pid = fork();
@@ -162,7 +162,7 @@ static void startPtrace()
         // (the EAX register has been overwritten by the kernel for various reasons,
         //  but there is a backup copy we can use)
         long syscall = ptrace(PTRACE_PEEKUSER, pid, sizeof(long) * ORIG_RAX);
-        const auto name = getSyscallName(syscall);
+        const auto name = syscallTable.getSyscallName(syscall);
 
         if (!waitForSyscall(pid))
             break;
