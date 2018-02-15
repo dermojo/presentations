@@ -134,7 +134,13 @@ static void startPtrace()
     if (pid == 0)
     {
         // child: allow the parent to start tracing here
-        ptrace(PTRACE_TRACEME);
+        if (ptrace(PTRACE_TRACEME) == -1)
+        {
+            // this may happen when running under a debugger
+            // (e.g. try "strace -f ./secret_application_trace)
+            std::cerr << "PTRACE_TRACEME failed!!! (" << strerror(errno) << "\n";
+            exit(-1);
+        }
         // stop the current process, so that we wait for the parent to start tracing
         kill(getpid(), SIGSTOP);
         return;
