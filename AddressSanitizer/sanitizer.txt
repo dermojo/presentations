@@ -1,0 +1,27 @@
+Address Sanitizer
+=================
+- by Google (https://github.com/google/sanitizers)
+- detects memory corruption bugs such as buffer overflows or accesses to a dangling pointer (use-after-free)
+- includes the "Leak Sanitizer"
+- currently implemented in Clang (starting from version 3.1),
+  GCC (starting from version 4.8) and Xcode (starting from version 7.0)
+- works on x86, ARM, MIPS (both 32- and 64-bit versions of all architectures), PowerPC64
+- supported operation systems are Linux, Darwin (OS X and iOS Simulator), FreeBSD, Android
+- Windows support only for C and fragile...
+
+
+AddressSanitizer (aka ASan) is a memory error detector for C/C++. It finds:    
+    Use after free (dangling pointer dereference)
+    Heap buffer overflow
+    Stack buffer overflow
+    Global buffer overflow
+    Use after return
+    Use after scope
+    Initialization order bugs
+    Memory leaks
+
+This tool is very fast. The average slowdown of the instrumented program is ~2x
+(see AddressSanitizerPerformanceNumbers).
+
+The tool consists of a compiler instrumentation module (currently, an LLVM pass) and a run-time
+library which replaces the malloc function.
