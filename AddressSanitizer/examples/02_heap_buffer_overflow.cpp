@@ -1,9 +1,12 @@
 // ASAN example: heap buffer overflow
+
+#include <iostream>
+#include <string>
+#include <vector>
+
 int main(int argc, char** argv)
 {
-    int* array = new int[100];
-    array[0] = 0;
-    int res = array[argc + 100]; // BOOM
-    delete[] array;
-    return res;
+    std::vector<std::string> data{ "no", "one", "two" };
+    std::cout << "You passed " << data[argc - 1] << " args(s)\n";
+    return 0;
 }

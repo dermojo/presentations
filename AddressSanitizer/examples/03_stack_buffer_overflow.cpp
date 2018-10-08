@@ -1,10 +1,11 @@
 // ASAN example: stack buffer overflow
 
-#pragma GCC diagnostic ignored "-Warray-bounds"
+#include <array>
+#include <iostream>
 
 int main(int argc, char** argv)
 {
-    int stack_array[100];
-    stack_array[1] = 0;
-    return stack_array[100 + argc]; // BOOM
+    std::array<const char*, 3> data{ "no", "one", "two" };
+    std::cout << "You passed " << data[argc - 1] << " args(s)\n";
+    return 0;
 }

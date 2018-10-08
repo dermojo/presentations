@@ -1,11 +1,14 @@
-volatile int* p = 0;
+// ASAN example: use after scope
+
+#include <string>
 
 int main()
 {
+    std::string* s;
     {
-        int x = 0;
-        p = &x;
+        std::string text = "foo bar baz";
+        s = &text;
     }
-    *p = 5;
+    *s = "Hello World";
     return 0;
 }

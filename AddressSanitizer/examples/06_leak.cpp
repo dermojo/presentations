@@ -1,3 +1,4 @@
+// ASAN example: memory leak
 #include <iostream>
 #include <memory>
 
