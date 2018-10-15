@@ -14,4 +14,5 @@ Contents:
  * [Custom Python interpreter for enhanced secrecy](https://github.com/dermojo/presentations/tree/master/Custom_Python_Interpreter) (2017-05-11)
  * [Trace yourself for fun and profit](https://github.com/dermojo/presentations/tree/master/Trace_yourself_for_fun_and_profit) (2018-02-15)
    Short ptrace demonstration to prevent debugging.
- 
+ * [Address Sanitizer](https://github.com/dermojo/presentations/tree/master/AddressSanitizer) (2018-10-11)
+   Short ASAN introduction with examples.
