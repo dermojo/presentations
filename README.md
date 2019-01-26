@@ -16,3 +16,5 @@ Contents:
    Short ptrace demonstration to prevent debugging.
  * [Address Sanitizer](https://github.com/dermojo/presentations/tree/master/AddressSanitizer) (2018-10-11)
    Short ASAN introduction with examples.
+ * [Catch yourself](https://github.com/dermojo/presentations/tree/master/Catch_Yourself/Catch%20yourself!%20(or_%20what%20to%20do%20in%20%E2%80%9Cooopsi%E2%80%9D%20situations).pdf) (2018-11-08)
+   Exception & signal handling, motivation for writing [ooopsi](https://github.com/dermojo/ooopsi)
