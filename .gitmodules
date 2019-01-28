@@ -1,0 +1,3 @@
+[submodule "Small_Object_Optimization/extern/googletest"]
+	path = Small_Object_Optimization/extern/googletest
+	url = https://github.com/google/googletest.git
