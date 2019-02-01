@@ -3,8 +3,7 @@
  * @brief   version 1 of SmallPtr: mimic unique_ptr behavior and interface
  */
 
-#ifndef SMALL_OBJECT_OPTIMIZATION_V1_UNIQUE_PTR_HPP_
-#define SMALL_OBJECT_OPTIMIZATION_V1_UNIQUE_PTR_HPP_
+#pragma once
 
 #include <type_traits>
 #include <utility>
@@ -71,5 +70,3 @@ void swap(SmallPtr<T>& lhs, SmallPtr<T>& rhs)
 {
     lhs.swap(rhs);
 }
-
-#endif /* SMALL_OBJECT_OPTIMIZATION_V1_UNIQUE_PTR_HPP_ */

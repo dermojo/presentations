@@ -1,6 +1,6 @@
 /**
- * @file    v2_with_stubs.cpp
- * @brief   version 2 of SmallPtr: add dummies to define the final interface
+ * @file    v3_type_erased.cpp
+ * @brief   version 3 of SmallPtr: use type erasure
  */
 
 #pragma once
@@ -8,17 +8,50 @@
 #include <type_traits>
 #include <utility>
 
+template <class T>
+class IStorage
+{
+public:
+    virtual ~IStorage() = default;
+    virtual IStorage<T>* moveTo(void*) = 0;
+    virtual T* get() noexcept = 0;
+    virtual const T* get() const noexcept = 0;
+};
+
+template <class Derived, class Base>
+class Storage : public IStorage<Base>
+{
+public:
+    template <typename... Args>
+    Storage(Args&&... args) : m_instance(std::forward<Args>(args)...)
+    {
+    }
+    virtual ~Storage() = default;
+
+    IStorage<Base>* moveTo(void* stack) final
+    {
+        return ::new (stack) Storage<Derived, Base>(std::move(m_instance));
+    }
+
+    Base* get() noexcept final { return &m_instance; }
+    const Base* get() const noexcept final { return &m_instance; }
+
+private:
+    Derived m_instance;
+};
+
 /// dummy class that only transports type information
 template <class T>
 class InPlace
 {
 };
 
-template <class T, size_t T_StackSize = 0>
+template <class T, size_t T_StackSize=0> // TODO
 class SmallPtr
 {
 private:
     static_assert(!std::is_array<T>::value, "arrays not supported");
+
     T* m_ptr;
 
 public:
