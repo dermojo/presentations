@@ -10,7 +10,8 @@
 //#include "v1_unique_ptr.hpp"
 //#include "v2_with_stubs.hpp"
 //#include "v3_type_erased.hpp"
-#include "v4_small_opt1.hpp"
+//#include "v4_small_opt1.hpp"
+#include "v5_small_opt2.hpp"
 //#include "small.hpp"
 
 // v5: remove boolean to save a byte
@@ -180,8 +181,8 @@ TEST(SmallPtr, Move)
         EXPECT_EQ(pet->makeSomeNoise(), "Woof, woof!");
     }
 
-#ifdef TEST_MOVING
     {
+#ifdef TEST_MOVING
         // a non-movable pet -> must go on the heap, even if it's "small"
         SmallPtr<IPet> pet(InPlace<Elephant>{}, 200, 1003.45);
         ASSERT_TRUE(sizeof(Elephant) <= 64);
@@ -204,8 +205,8 @@ TEST(SmallPtr, Move)
         // but we can construct a new pet
         pet.emplace<Parrot>("George");
         EXPECT_EQ(pet->makeSomeNoise(), "George!");
-    }
 #endif
+    }
 }
 
 TEST(SmallPtr, Swap)
