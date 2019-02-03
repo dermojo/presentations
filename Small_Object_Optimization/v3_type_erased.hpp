@@ -13,13 +13,12 @@ class IStorage
 {
 public:
     virtual ~IStorage() = default;
-    virtual IStorage<T>* moveTo(void*) = 0;
     virtual T* get() noexcept = 0;
     virtual const T* get() const noexcept = 0;
 };
 
 template <class Derived, class Base>
-class Storage : public IStorage<Base>
+class Storage final : public IStorage<Base>
 {
 public:
     template <typename... Args>
@@ -28,16 +27,25 @@ public:
     }
     virtual ~Storage() = default;
 
-    IStorage<Base>* moveTo(void* stack) final
-    {
-        return ::new (stack) Storage<Derived, Base>(std::move(m_instance));
-    }
-
     Base* get() noexcept final { return &m_instance; }
     const Base* get() const noexcept final { return &m_instance; }
 
 private:
     Derived m_instance;
+};
+
+template <class Base>
+class StoragePtr final : public IStorage<Base>
+{
+public:
+    StoragePtr(Base* ptr) : m_instance(ptr) {}
+    virtual ~StoragePtr() { delete m_instance; }
+
+    Base* get() noexcept final { return m_instance; }
+    const Base* get() const noexcept final { return m_instance; }
+
+private:
+    Base* m_instance;
 };
 
 /// dummy class that only transports type information
@@ -46,17 +54,30 @@ class InPlace
 {
 };
 
-template <class T, size_t T_StackSize=0> // TODO
+template <class T, size_t T_StackSize = 0> // TODO
 class SmallPtr
 {
 private:
     static_assert(!std::is_array<T>::value, "arrays not supported");
 
-    T* m_ptr;
+    IStorage<T>* m_ptr;
+
+    T* getPtr() noexcept
+    {
+        if (!m_ptr)
+            return nullptr;
+        return m_ptr->get();
+    }
+    const T* getPtr() const noexcept
+    {
+        if (!m_ptr)
+            return nullptr;
+        return m_ptr->get();
+    }
 
 public:
     SmallPtr() noexcept : m_ptr(nullptr) {}
-    explicit SmallPtr(T* ptr) noexcept : m_ptr(ptr) {}
+    explicit SmallPtr(T* ptr) noexcept : m_ptr(ptr) { reset(ptr); }
     ~SmallPtr() { reset(); }
 
     template <class Derived, class... Args>
@@ -85,13 +106,19 @@ public:
     void reset(T* ptr = nullptr) noexcept
     {
         if (m_ptr)
+        {
             delete m_ptr;
-        m_ptr = ptr;
+            m_ptr = nullptr;
+        }
+        if (ptr)
+        {
+            m_ptr = new StoragePtr<T>(ptr);
+        }
     }
 
     // access functions/operator
-    T* get() noexcept { return m_ptr; }
-    const T* get() const noexcept { return m_ptr; }
+    T* get() noexcept { return getPtr(); }
+    const T* get() const noexcept { return getPtr(); }
 
     T* operator->() noexcept { return get(); }
     const T* operator->() const noexcept { return get(); }

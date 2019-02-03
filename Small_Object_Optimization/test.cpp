@@ -13,12 +13,11 @@
 #include "v4_small_opt1.hpp"
 //#include "small.hpp"
 
-// v3: type erasure
-// v4: small buffer + placement new (very simple)
 // v5: remove boolean to save a byte
 
 // vX: optimized for size with function pointer
 
+//#define TEST_MOVING
 
 // test various constructors
 TEST(SmallPtr, Construct)
@@ -48,6 +47,7 @@ TEST(SmallPtr, Construct)
     EXPECT_TRUE(p4.usesHeap());
     EXPECT_FALSE(p4.usesStack());
 
+#ifdef TEST_MOVING
     // construct an elephant (2-3 args)
     SmallPtr<IPet> p5(InPlace<Elephant>{}, 123, 123.45);
     ASSERT_TRUE(p5);
@@ -61,6 +61,7 @@ TEST(SmallPtr, Construct)
     EXPECT_EQ(p6->makeSomeNoise(), "Toooooooooot!");
     EXPECT_TRUE(p6.usesHeap());
     EXPECT_FALSE(p6.usesStack());
+#endif
 }
 
 // test .emplace()
@@ -86,7 +87,7 @@ TEST(SmallPtr, Emplace)
 // test .reset()
 TEST(SmallPtr, Reset)
 {
-    SmallPtr<IPet> pet;
+    SmallPtr<IPet, 8> pet;
 
     pet.emplace<Dog>();
     EXPECT_EQ(pet->makeSomeNoise(), "Woof, woof!");
@@ -97,10 +98,13 @@ TEST(SmallPtr, Reset)
     EXPECT_EQ(pet.get(), nullptr);
 
     // "adopt" an existing one
-    pet.reset(new Parrot("Valentine"));
+    IPet* p = new Parrot("Valentine");
+    pet.reset(p);
     ASSERT_TRUE(pet);
+    ASSERT_EQ(pet.get(), p);
     ASSERT_NE(pet.get(), nullptr);
     EXPECT_EQ(pet->makeSomeNoise(), "Valentine!");
+    EXPECT_FALSE(pet.usesHeap());
 }
 
 // make sure the optimization works...
@@ -176,6 +180,7 @@ TEST(SmallPtr, Move)
         EXPECT_EQ(pet->makeSomeNoise(), "Woof, woof!");
     }
 
+#ifdef TEST_MOVING
     {
         // a non-movable pet -> must go on the heap, even if it's "small"
         SmallPtr<IPet> pet(InPlace<Elephant>{}, 200, 1003.45);
@@ -200,6 +205,7 @@ TEST(SmallPtr, Move)
         pet.emplace<Parrot>("George");
         EXPECT_EQ(pet->makeSomeNoise(), "George!");
     }
+#endif
 }
 
 TEST(SmallPtr, Swap)
