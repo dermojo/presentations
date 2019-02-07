@@ -11,14 +11,10 @@
 //#include "v2_with_stubs.hpp"
 //#include "v3_type_erased.hpp"
 //#include "v4_small_opt1.hpp"
-#include "v5_small_opt2.hpp"
-//#include "small.hpp"
+//#include "v5_small_opt2.hpp"
+#include "v6_function_ptr.hpp"
 
-// v5: remove boolean to save a byte
-
-// vX: optimized for size with function pointer
-
-//#define TEST_MOVING
+#define TEST_MOVING
 
 // test various constructors
 TEST(SmallPtr, Construct)
@@ -105,7 +101,7 @@ TEST(SmallPtr, Reset)
     ASSERT_EQ(pet.get(), p);
     ASSERT_NE(pet.get(), nullptr);
     EXPECT_EQ(pet->makeSomeNoise(), "Valentine!");
-    EXPECT_FALSE(pet.usesHeap());
+    EXPECT_TRUE(pet.usesHeap());
 }
 
 // make sure the optimization works...

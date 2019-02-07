@@ -26,7 +26,7 @@ public:
         this->swap(rhs);
         return *this;
     }
-    SmallPtr& operator=(nullptr_t) noexcept
+    SmallPtr& operator=(std::nullptr_t) noexcept
     {
         reset();
         return *this;
@@ -55,8 +55,8 @@ public:
     const T& operator*() const noexcept { return *get(); }
 
     // check functions
-    bool operator==(nullptr_t) const noexcept { return get() == nullptr; }
-    bool operator!=(nullptr_t) const noexcept { return get() != nullptr; }
+    bool operator==(std::nullptr_t) const noexcept { return get() == nullptr; }
+    bool operator!=(std::nullptr_t) const noexcept { return get() != nullptr; }
     explicit operator bool() const noexcept { return *this != nullptr; }
 
     // TODO
