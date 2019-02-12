@@ -64,15 +64,15 @@ private:
 
     T* getPtr() noexcept
     {
-        if (!m_ptr)
-            return nullptr;
-        return m_ptr->get();
+        if (m_ptr)
+            return m_ptr->get();
+        return nullptr;
     }
     const T* getPtr() const noexcept
     {
-        if (!m_ptr)
-            return nullptr;
-        return m_ptr->get();
+        if (m_ptr)
+            return m_ptr->get();
+        return nullptr;
     }
 
 public:

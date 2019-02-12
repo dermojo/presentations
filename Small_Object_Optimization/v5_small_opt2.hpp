@@ -20,7 +20,7 @@ public:
 };
 
 template <class Derived, class Base>
-class StackStorage : public IStorage<Base>
+class StackStorage final : public IStorage<Base>
 {
 public:
     template <typename... Args>
@@ -44,7 +44,7 @@ private:
 };
 
 template <class Derived, class Base>
-class HeapStorage : public IStorage<Base>
+class HeapStorage final : public IStorage<Base>
 {
 public:
     template <typename... Args>
@@ -172,6 +172,7 @@ public:
         }
         if (ptr)
         {
+            // support the fact that m_stack may be too small for a pointer...
             using StackType = StoragePtr<T, false>;
             using HeapType = StoragePtr<T, true>;
             emplaceImpl<StackType, HeapType>(ptr);

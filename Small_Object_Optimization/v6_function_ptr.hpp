@@ -58,8 +58,8 @@ template <class Derived, class Base>
 class StackStorage
 {
 public:
-    using ParamType = ParamTypes<Base>;
-    static void execute(Action action, typename ParamType::Param& param)
+    using Params = ParamTypes<Base>;
+    static void execute(Action action, typename Params::Param& param)
     {
         switch (action)
         {
@@ -83,21 +83,21 @@ public:
         }
     }
 
-    static void moveTo(typename ParamType::MoveTo& param)
+    static void moveTo(typename Params::MoveTo& param)
     {
         Derived* fromPtr = reinterpret_cast<Derived*>(param.stackFrom);
         ::new (param.stackTo) Derived(std::move(*fromPtr));
     }
-    static void get(typename ParamType::GetNonConst& param)
+    static void get(typename Params::GetNonConst& param)
     {
         param.ptr = reinterpret_cast<Derived*>(param.stack);
     }
-    static void get(typename ParamType::GetConst& param)
+    static void get(typename Params::GetConst& param)
     {
         param.ptr = reinterpret_cast<const Derived*>(param.stack);
     }
-    static void usesHeap(typename ParamType::UsesHeap& param) { param.value = false; }
-    static void destroy(typename ParamType::Destroy& param)
+    static void usesHeap(typename Params::UsesHeap& param) { param.value = false; }
+    static void destroy(typename Params::Destroy& param)
     {
         Derived* ptr = reinterpret_cast<Derived*>(param.stack);
         ptr->~Derived();
@@ -108,8 +108,8 @@ template <class Derived, class Base>
 class HeapStorage
 {
 public:
-    using ParamType = ParamTypes<Base>;
-    static void execute(Action action, typename ParamType::Param& param)
+    using Params = ParamTypes<Base>;
+    static void execute(Action action, typename Params::Param& param)
     {
         switch (action)
         {
@@ -133,25 +133,25 @@ public:
         }
     }
 
-    static void moveTo(typename ParamType::MoveTo& param)
+    static void moveTo(typename Params::MoveTo& param)
     {
         memcpy(param.stackTo, param.stackFrom, sizeof(Base*));
         set(param.stackFrom, nullptr);
     }
-    static void get(typename ParamType::GetNonConst& param)
+    static void get(typename Params::GetNonConst& param)
     {
         Derived* ptr;
         memcpy(&ptr, param.stack, sizeof(Base*));
         param.ptr = ptr;
     }
-    static void get(typename ParamType::GetConst& param)
+    static void get(typename Params::GetConst& param)
     {
         const Derived* ptr;
         memcpy(&ptr, param.stack, sizeof(Base*));
         param.ptr = ptr;
     }
-    static void usesHeap(typename ParamType::UsesHeap& param) { param.value = true; }
-    static void destroy(typename ParamType::Destroy& param)
+    static void usesHeap(typename Params::UsesHeap& param) { param.value = true; }
+    static void destroy(typename Params::Destroy& param)
     {
         Derived* ptr;
         memcpy(&ptr, param.stack, sizeof(Base*));

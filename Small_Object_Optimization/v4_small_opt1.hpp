@@ -19,7 +19,7 @@ public:
 };
 
 template <class Derived, class Base>
-class Storage : public IStorage<Base>
+class Storage final : public IStorage<Base>
 {
 public:
     template <typename... Args>
@@ -192,18 +192,18 @@ private:
 
     void assign(SmallPtr<T, T_StackSize>& rhs) /* noexcept */
     {
-        if (!rhs.m_usesHeap && rhs.m_ptr)
+        m_usesHeap = rhs.m_usesHeap;
+        if (rhs.usesStack() && rhs.m_ptr)
         {
             m_ptr = rhs.m_ptr->moveTo(&m_stack);
+            rhs.reset();
         }
         else
         {
             m_ptr = rhs.m_ptr;
+            rhs.m_ptr = nullptr;
+            rhs.m_usesHeap = false;
         }
-        m_usesHeap = rhs.m_usesHeap;
-
-        rhs.m_ptr = nullptr;
-        rhs.m_usesHeap = false;
     }
 };
 
