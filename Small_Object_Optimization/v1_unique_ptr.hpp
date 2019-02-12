@@ -17,7 +17,7 @@ private:
 
 public:
     SmallPtr() noexcept : m_ptr(nullptr) {}
-    explicit SmallPtr(T* ptr) noexcept : m_ptr(ptr) {}
+    explicit SmallPtr(T* ptr) noexcept : m_ptr(nullptr) { reset(ptr); }
     ~SmallPtr() { reset(); }
 
     SmallPtr(SmallPtr&& rhs) noexcept : m_ptr(nullptr) { this->swap(rhs); }

@@ -77,7 +77,7 @@ private:
 
 public:
     SmallPtr() noexcept : m_ptr(nullptr) {}
-    explicit SmallPtr(T* ptr) noexcept : m_ptr(ptr) { reset(ptr); }
+    explicit SmallPtr(T* ptr) noexcept : m_ptr(nullptr) { reset(ptr); }
     ~SmallPtr() { reset(); }
 
     template <class Derived, class... Args>
