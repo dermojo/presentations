@@ -11,7 +11,7 @@ It finds
 * Normal data races
 * Races on C++ object vptr
 * Use after free races
-* Races on mutexes, file descriptors, pthread_barrier_t
+* Races on mutexes, file descriptors, barriers
 * Destruction of a locked mutex
 * Leaked threads
 * Signal-unsafe malloc/free calls in signal handlers
