@@ -18,3 +18,7 @@ Contents:
    Short ASAN introduction with examples.
  * [Catch yourself](https://github.com/dermojo/presentations/tree/master/Catch_Yourself/Catch%20yourself!%20(or_%20what%20to%20do%20in%20%E2%80%9Cooopsi%E2%80%9D%20situations).pdf) (2018-11-08)
    Exception & signal handling, motivation for writing [ooopsi](https://github.com/dermojo/ooopsi)
+ * [Small Object Optimization](https://github.com/dermojo/presentations/tree/master/Small_Object_Optimization) (2019-05-09)
+   Different stages while building a unique_ptr version that has small buffer optimization
+ * [ThreadSanitizer](https://github.com/dermojo/presentations/tree/master/ThreadSanitizer) (2019-06-13)
+   Short TSAN introduction with examples
