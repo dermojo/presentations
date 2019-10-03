@@ -22,3 +22,5 @@ Contents:
    Different stages while building a unique_ptr version that has small buffer optimization
  * [ThreadSanitizer](https://github.com/dermojo/presentations/tree/master/ThreadSanitizer) (2019-06-13)
    Short TSAN introduction with examples
+ * [UBSanitizer](https://github.com/dermojo/presentations/tree/master/UBSanitizer) (2019-10-10)
+   Short UBSan introduction with examples
