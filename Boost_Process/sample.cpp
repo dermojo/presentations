@@ -155,6 +155,12 @@ int main()
 #endif
         std::cout << "======= Running fail =======\n";
         fail();
+
+        std::cout << "======= Env check =======\n";
+        auto env = boost::this_process::environment();
+        env["MYPATH"] = {"bar1", "bar2"};
+        std::cout << "MYPATH=" << env.at("MYPATH").to_string() << "\n";
+
         return 0;
     }
     catch (const std::exception& exc)
