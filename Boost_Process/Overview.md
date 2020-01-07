@@ -229,5 +229,33 @@ bp::system("stuff", bp::env["VALUE_1"]="foo",
 Extensions
 ----------
 
-TODO
+Different handlers are called during execution:
 
+* `on_setup`: Invoked before the process is launched.
+* `on_error`: Invoked on error (on the parent).
+* `on_success`: Invoked after successful launch of the child.
+
+
+Extensions
+----------
+
+Additional handlers for POSIX:
+
+* `on_fork_error`: Invoked on the parent if `fork()` failed.
+* `on_exec_error`: Invoked on the child(!) if `execve()` failed.
+* `on_exec_setup`: Invoked on the child(!) after successful `fork()`.
+    * great for changing permissions/umask/...
+
+
+Extensions - Windows/all
+------------------------
+
+![](windows_exec_ok.svg)
+![](windows_exec_err.svg)
+
+Extensions - POSIX only
+-----------------------
+
+![](posix_exec_ok.svg)
+![](posix_exec_err.svg)
+![](posix_fork_err.svg)

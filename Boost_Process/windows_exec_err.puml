@@ -1,0 +1,17 @@
+@startuml
+participant Parent
+participant Child
+
+activate Parent
+Parent -> Parent : on_setup()
+activate Parent
+deactivate Parent
+
+Parent --> Child : CreateProcess() - failed
+destroy Child
+
+Parent -> Parent : on_error()
+activate Parent
+deactivate Parent
+
+@enduml

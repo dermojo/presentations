@@ -1,0 +1,34 @@
+@startuml
+participant Parent
+participant Child
+
+activate Parent
+Parent -> Parent : on_setup()
+activate Parent
+deactivate Parent
+
+Parent -> Child : fork()
+activate Child
+
+Parent -> Parent : wait for error
+deactivate Parent
+
+Child -> Child : on_exec_setup()
+activate Child
+deactivate Child
+
+Child --> Child : execve() - failed
+
+Child -> Child : on_exec_error()
+activate Child
+deactivate Child
+
+Child -> Parent : error
+deactivate Child
+
+activate Parent
+Parent -> Parent : on_error()
+activate Parent
+deactivate Parent
+
+@enduml
