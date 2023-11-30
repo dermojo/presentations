@@ -26,3 +26,5 @@ Contents:
    Short UBSan introduction with examples
  * [Boost.Process](https://github.com/dermojo/presentations/tree/master/Boost_Process) (2020-01-09)
    Introduction into Boost.Process, with examples.
+ * [Useful Boost Containers](https://github.com/dermojo/presentations/tree/master/Useful_Boost_Containers) (2023-11-29)
+   An overview of various container libraries in Boost.
