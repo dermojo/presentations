@@ -1,0 +1,27 @@
+{
+    "namespaceReplacements":
+    {
+        "std": "",
+        "__gnu_cxx": "cxx",
+        "impl": "_",
+        "implementation": "_",
+        "detail": "_"
+    },
+    "genericReplacements":
+    {
+        "/opt/compiler-explorer/[^:]*/include/c\\+\\+": "<STDLIB>",
+        "C:/data/msvc/[0-9\\.]+/include": "<STDLIB>", 
+        "cxx::__normal_iterator": "iterator",
+        "lambda\\(": "[?]("
+    },
+
+
+
+    "____TODO____":
+    {
+        "__cxx11::basic_string<char>": "string",
+        "basic_ostream<char(, _Traits)?>": "ostream",
+        "basic_ostream<char,char_traits<char>>": "ostream",
+        "allocator<[^>]+>": "💩"
+    }
+}
