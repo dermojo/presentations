@@ -2,3 +2,6 @@
 /.cproject
 /.settings/
 /.pydevproject
+/.cache
+Introduction_to_ranges/range-v3-0.12.0
+compile_commands.json

@@ -30,3 +30,5 @@ Contents:
    An overview of various container libraries in Boost.
  * [How to read template error messages](https://github.com/dermojo/presentations/tree/master/How_to_read_template_error_messages) (2024-04-10)
    How to make C++ template error messages easier to read.
+ * [Introduction to ranges](https://github.com/dermojo/presentations/tree/master/Introduction_to_ranges) (2024-06-05)
+   Introduction into ranges (v3 & std).
