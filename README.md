@@ -32,3 +32,5 @@ Contents:
    How to make C++ template error messages easier to read.
  * [Introduction to ranges](https://github.com/dermojo/presentations/tree/master/Introduction_to_ranges) (2024-06-05)
    Introduction into ranges (v3 & std).
+ * [Introduction into GoogleTest and GoogleMock](https://github.com/dermojo/presentations/tree/master/GoogleTest_GoogleMock) (2024-10-09)
+   Introduction into GoogleTest and GoogleMock.
