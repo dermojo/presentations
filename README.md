@@ -34,3 +34,5 @@ Contents:
    Introduction into ranges (v3 & std).
  * [Introduction into GoogleTest and GoogleMock](https://github.com/dermojo/presentations/tree/master/GoogleTest_GoogleMock) (2024-10-09)
    Introduction into GoogleTest and GoogleMock.
+ * [C++20 - the small things (part 1)](https://github.com/dermojo/presentations/tree/master/C++20_the_small_things_1) (2025-04-02)
+   Initialization & CTAD.
