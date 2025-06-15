@@ -2,6 +2,8 @@
 
 This repository collects various presentations I gave on C++ User Group meetings in Aachen, Germany.
 
+***This repository has moved to Codeberg: https://codeberg.org/dermojo/presentations***
+
 Contents:
  * [Introduction to Boost.ASIO](https://github.com/dermojo/presentations/tree/master/Introduction_to_Boost.ASIO) (2014-08-14)
  * [BoostMSM-Demo](https://github.com/dermojo/presentations/tree/master/BoostMSM-Demo):
